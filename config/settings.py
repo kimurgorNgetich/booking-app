@@ -152,6 +152,7 @@ MPESA_SHORTCODE = os.environ.get("MPESA_SHORTCODE", "")
 MPESA_PASSKEY = os.environ.get("MPESA_PASSKEY", "")
 MPESA_BASE_URL = os.environ.get("MPESA_BASE_URL", "https://sandbox.safaricom.co.ke")
 MPESA_CALLBACK_URL = os.environ.get("MPESA_CALLBACK_URL", "")
+MPESA_CALLBACK_SECRET = os.environ.get("MPESA_CALLBACK_SECRET", "")
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
