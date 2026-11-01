@@ -12,5 +12,9 @@
         <div class="flex justify-between gap-4"><dt class="text-ink-muted">Status</dt><dd class="font-medium text-right">{{ appointment.get_status_display }}</dd></div>
     </dl>
 
-    <p class="text-sm text-ink-muted mt-5">Your slot is held. It is confirmed once your M-Pesa deposit is received.</p>
+    {% if appointment.payments.exists %}
+        <p class="text-sm text-ink-muted mt-5">Check your phone: an M-Pesa prompt for KES {{ appointment.service.price }} is on its way. Enter your PIN to confirm your booking.</p>
+    {% else %}
+        <p class="text-sm text-ink-muted mt-5">Your slot is held, but we couldn't start the M-Pesa payment. We'll call you to confirm.</p>
+    {% endif %}
 {% endblock %}

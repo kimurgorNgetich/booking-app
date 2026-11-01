@@ -2,8 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core import signing
 from django.http import Http404
 from .forms import BookingForm
-from .models import Client, Appointment
+from .models import Client, Appointment, Payment
+import logging
 
+import requests
+
+from .mpesa import stk_push
+
+logger = logging.getLogger(__name__)
 
 
 def book(request):
@@ -17,6 +23,23 @@ def book(request):
             appointment = Appointment.objects.create(
                 client=client, service=data["service"], start_time=data["start_time"]
             )
+
+            try:
+                result = stk_push(
+                    phone=client.phone,
+                    amount=data["service"].price,
+                    account_reference=f"AC{appointment.pk}",
+                    description="Booking deposit",
+                )
+                Payment.objects.create(
+                    appointment=appointment,
+                    amount=data["service"].price,
+                    phone=client.phone,
+                    checkout_request_id=result["CheckoutRequestID"],
+                )
+            except (requests.RequestException, RuntimeError, KeyError):
+                logger.exception("STK push failed for appointment %s", appointment.pk)
+
             token = signing.dumps(appointment.pk, salt="booking-success")
             return redirect("booking_success", token=token)
     else:
