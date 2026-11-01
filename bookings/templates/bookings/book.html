@@ -1,26 +1,22 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Book an appointment</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-rose-50 min-h-screen flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-md rounded-2xl shadow p-6">
-        <h1 class="text-2xl font-semibold mb-1">Book an appointment</h1>
-        <p class="text-gray-500 mb-6">Advance Choice</p>
-        <form method="post" class="space-y-4">
-            {% csrf_token %}
-            {% for field in form %}
-                <div>
-                    <label class="block text-sm font-medium mb-1" for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field }}
-                    {% for error in field.errors %}<p class="text-red-600 text-sm mt-1">{{ error }}</p>{% endfor %}
-                </div>
-            {% endfor %}
-            <button type="submit" class="w-full bg-rose-600 text-white rounded-lg py-2 font-medium">Book</button>
-        </form>
-    </div>
-</body>
-</html>
+{% extends "bookings/base.html" %}
+{% block title %}Book an appointment · Advance Choice{% endblock %}
+
+{% block content %}
+    <h1 class="font-display text-forest text-3xl">Book an appointment</h1>
+    <div class="w-12 h-px bg-ochre mt-3 mb-6"></div>
+
+    <form method="post" class="space-y-5" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+        <div>
+            <label for="{{ field.id_for_label }}" class="block text-xs font-semibold uppercase tracking-[0.14em] text-ink-muted mb-1.5">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<p class="text-xs text-ink-muted mt-1">{{ field.help_text }}</p>{% endif %}
+            {% for error in field.errors %}<p class="text-sm text-error mt-1">{{ error }}</p>{% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="w-full bg-forest text-cream text-sm font-medium uppercase tracking-[0.14em] py-3 rounded-sm hover:opacity-90">
+        Book appointment
+        </button>
+    </form>
+{% endblock %}

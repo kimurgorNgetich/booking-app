@@ -17,7 +17,7 @@ class BookingForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
-            field.widget.attrs["class"] = "w-full border rounded-lg px-3 py-2"
+                        field.widget.attrs["class"] = "w-full bg-white border border-hairline rounded-sm px-3 py-2.5 text-ink focus:outline-none focus:ring-2 focus:ring-forest"
 
     def clean_phone(self):
         phone = re.sub(r"\D", "", self.cleaned_data["phone"])
