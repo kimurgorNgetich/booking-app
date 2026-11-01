@@ -1,0 +1,16 @@
+{% extends "bookings/base.html" %}
+{% block title %}Booking received · Advance Choice{% endblock %}
+
+{% block content %}
+    <h1 class="font-display text-forest text-3xl">Booking received</h1>
+    <div class="w-12 h-px bg-ochre mt-3 mb-6"></div>
+
+    <dl class="bg-cream-deep rounded-sm p-4 space-y-3 text-sm">
+        <div class="flex justify-between gap-4"><dt class="text-ink-muted">Service</dt><dd class="font-medium text-right">{{ appointment.service.name }}</dd></div>
+        <div class="flex justify-between gap-4"><dt class="text-ink-muted">Date</dt><dd class="font-medium text-right">{{ appointment.start_time|date:"l j F, H:i" }}</dd></div>
+        <div class="flex justify-between gap-4"><dt class="text-ink-muted">Deposit</dt><dd class="font-medium text-right">KES {{ appointment.service.price }}</dd></div>
+        <div class="flex justify-between gap-4"><dt class="text-ink-muted">Status</dt><dd class="font-medium text-right">{{ appointment.get_status_display }}</dd></div>
+    </dl>
+
+    <p class="text-sm text-ink-muted mt-5">Your slot is held. It is confirmed once your M-Pesa deposit is received.</p>
+{% endblock %}

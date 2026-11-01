@@ -1,0 +1,49 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Advance Choice{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+        tailwind.config = {
+        theme: {
+            extend: {
+            colors: {
+                forest: "#1F3D2B",
+                cream: "#F7F3EA",
+                "cream-deep": "#EDE6D6",
+                ink: "#1E1E1C",
+                "ink-muted": "#57564E",
+                ochre: "#9A7020",
+                hairline: "#D9D2C2",
+                error: "#9E4F45",
+            },
+            fontFamily: {
+                display: ['"Cormorant Garamond"', "Georgia", "serif"],
+                sans: ["Jost", "Helvetica Neue", "Arial", "sans-serif"],
+            },
+            },
+        },
+        };
+    </script>
+</head>
+<body class="bg-cream text-ink font-sans min-h-screen flex flex-col">
+    <header class="pt-8 pb-4 flex justify-center">
+        <img src="{% static 'bookings/ac-logo.png' %}" alt="Advance Choice" class="h-28 w-auto">
+    </header>
+
+    <main class="flex-1 flex justify-center px-4 pb-10">
+        <div class="w-full max-w-md bg-white border border-hairline rounded-sm p-6 sm:p-8">
+        {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="text-center text-xs text-ink-muted px-4 pb-6 leading-relaxed">
+        Advance Choice Ltd · Queensway House, 1st Floor, Kaunda Street, Nairobi · +254 722 757 536
+    </footer>
+</body>
+</html>

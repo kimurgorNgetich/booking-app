@@ -1,0 +1,22 @@
+{% extends "bookings/base.html" %}
+{% block title %}Book an appointment · Advance Choice{% endblock %}
+
+{% block content %}
+    <h1 class="font-display text-forest text-3xl">Book an appointment</h1>
+    <div class="w-12 h-px bg-ochre mt-3 mb-6"></div>
+
+    <form method="post" class="space-y-5" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+        <div>
+            <label for="{{ field.id_for_label }}" class="block text-xs font-semibold uppercase tracking-[0.14em] text-ink-muted mb-1.5">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<p class="text-xs text-ink-muted mt-1">{{ field.help_text }}</p>{% endif %}
+            {% for error in field.errors %}<p class="text-sm text-error mt-1">{{ error }}</p>{% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="w-full bg-forest text-cream text-sm font-medium uppercase tracking-[0.14em] py-3 rounded-sm hover:opacity-90">
+        Book appointment
+        </button>
+    </form>
+{% endblock %}
